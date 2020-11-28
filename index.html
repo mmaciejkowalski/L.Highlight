@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta charset='UTF-8' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+    <meta title='Title' />
+    
+    <link rel='stylesheet' href='https://unpkg.com/leaflet@1.7.1/dist/leaflet.css' />
+    <link rel='stylesheet'
+        href='https:////cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.4.0/build/styles/monokai.min.css' />
+    <link rel='stylesheet' href='css/styles.css' />
+
+    <script src='https://unpkg.com/leaflet@1.7.1/dist/leaflet.js'></script>
+    <script src='dist/leaflet-highlight.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.4.0/highlight.min.js'></script>
+</head>
+
+<body>
+    <div>
+        <div class="header">
+            <h2><span class="hljs-title">L.Highlight</span> demo</h2>
+            <h3><a href="https://github.com/mmaciejkowalski/L.Highlight"><img
+                        src="data:image/png;base64,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" />mmaciejkowalski/L.Highlight</a>
+            </h3>
+        </div>
+        <section>
+            <div id='map1' class='map'></div>
+            <pre><code class='typescript'>
+// simple query, but look around - it matches
+// also 'Piotrkowska' around the Łódź city!
+
+var map1 = L.map('map1').setView([51.759306, 19.458585], 14);
+
+L.tileLayer( {...} ).addTo(map1);
+
+new L.Layer.Highlight().do({
+    q: 'Piotrkowska, Łódź'
+}).addTo(map1);
+        </code></pre>
+        </section>
+        <section>
+            <div id='map2' class='map'></div>
+            <pre><code class='typescript'>
+// advanced query, look around - it does
+// not match 'Piotrkowska' around the Łódź city!
+
+var map1 = L.map('map2').setView([51.759306, 19.458585], 14);
+
+L.tileLayer( {...} ).addTo(map2);
+
+new L.Layer.Highlight().do({
+    street: 'Piotrkowska',
+    city: 'Łódź'
+}).addTo(map2);
+            </code></pre>
+        </section>
+        <section>
+            <div id='map3' class='map'></div>
+            <pre><code class='typescript'>
+// what about areas? Remember to change
+// default StringLine filter to Polygon!
+
+var map3 = L.map('map3').setView([51.779150, 19.444561], 14);
+
+L.tileLayer( {...} ).addTo(map2);
+
+new L.Layer.Highlight().do({
+    q: 'Manufaktura, Łódź',
+    filter: 'Polygon'
+}).addTo(map3);
+            </code></pre>
+        </section>
+        <section>
+            <div id='map4' class='map'></div>
+            <pre><code class='typescript'>
+// highlighting parks should be always done in green, I think.
+
+var map4 = L.map('map4').setView([51.753828, 19.442483], 14);
+
+L.tileLayer( {...} ).addTo(map2);
+
+new L.Layer.Highlight().do({
+    q: 'Park Poniatowskiego, Łódź', 
+    filter: 'Polygon'
+}, {
+    style: function(x) {
+        return {color: '#0f0'}
+    }
+}).addTo(map4);
+            </code></pre>
+        </section>
+        <section>
+            <div id='map5' class='map'></div>
+            <pre><code class='typescript'>
+// advanced query, look around - it does
+// not match 'Piotrkowska' around the Łódź city!
+
+var map5 = L.map('map5').setView([51.750264, 19.453295], 14);
+
+L.tileLayer( {...} ).addTo(map2);
+
+new L.Layer.Highlight().do({
+    q: 'Politechnika, Łódź',
+    filter: 'Polygon'
+}, {
+    style: function() {
+        return { color: '#f00' };
+    }, eventHandlers: { 
+        click: function(area) {
+            alert(area.sourceTarget.feature.properties.display_name);
+        }
+    }
+}).addTo(map5);
+            </code></pre>
+        </section>
+    </div>
+
+    <script src='js/scripts.js'></script>
+    <script>
+        document.querySelectorAll('pre code').forEach((block) => {
+            hljs.highlightBlock(block);
+        });
+        setTimeout(function () { start(); }, 100);
+    </script>
+</body>
+
+</html>
