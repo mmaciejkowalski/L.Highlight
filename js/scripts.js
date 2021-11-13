@@ -80,4 +80,35 @@ function start() {
   ).addTo(map5);
 
   new L.Layer.Highlight().do({ q: "Politechnika, Łódź", filter: "Polygon" }, { style: function () { return { color: "#f00" }; }, eventHandlers: { click: function (area) { alert(area.sourceTarget.feature.properties.display_name); } } }).addTo(map5);
+
+  /**
+   * sixth map
+   */
+  var map6 = L.map("map6").setView([51.750264, 19.453295], 11);
+
+  L.tileLayer(
+    "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+    {
+      maxZoom: 16,
+      attribution: attrStr
+    },
+    { className: "grayscale" }
+  ).addTo(map6);
+
+  let districts = [
+    new L.Layer.Highlight().do({ q: 'Łódź Bałuty, Łódź', filter: "Polygon" }),
+    new L.Layer.Highlight().do({ q: 'Łódź Widzew, Łódź', filter: "Polygon" }),
+    new L.Layer.Highlight().do({ q: 'Łódź Górna, Łódź', filter: "Polygon" }),
+    new L.Layer.Highlight().do({ q: 'Łódź Polesie, Łódź', filter: "Polygon" }),
+    new L.Layer.Highlight().do({ q: 'Łódź Śródmieście, Łódź', filter: "Polygon" })
+  ];
+
+  var i = 0;
+  setInterval(highlightNext, 1000);
+
+  function highlightNext() {
+    districts[i].removeFrom(map6);
+    i = (++i)%5;
+    districts[i].addTo(map6);
+  }
 }
