@@ -113,6 +113,33 @@ new L.Layer.Highlight().do({
 }).addTo(map5);
             </code></pre>
         </section>
+        <section>
+            <div id='map6' class='map'></div>
+            <pre><code class='typescript'>
+// Have some fun, remove layers!
+
+var map6 = L.map("map6").setView([51.750264, 19.453295], 11);
+
+L.tileLayer( {...} ).addTo(map6);
+
+let districts = [
+	new L.Layer.Highlight().do({ q: 'Łódź Bałuty, Łódź', filter: "Polygon" }),
+	new L.Layer.Highlight().do({ q: 'Łódź Widzew, Łódź', filter: "Polygon" }),
+	new L.Layer.Highlight().do({ q: 'Łódź Górna, Łódź', filter: "Polygon" }),
+	new L.Layer.Highlight().do({ q: 'Łódź Polesie, Łódź', filter: "Polygon" }),
+	new L.Layer.Highlight().do({ q: 'Łódź Śródmieście, Łódź', filter: "Polygon" })
+];
+
+var i = 0;
+setInterval(highlightNext, 1000);
+
+function highlightNext() {
+	districts[i].removeFrom(map6);
+	i = (++i)%5;
+	districts[i].addTo(map6);
+}
+            </code></pre>
+        </section>
     </div>
 
     <script src='js/scripts.js'></script>
