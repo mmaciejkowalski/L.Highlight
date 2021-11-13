@@ -1,6 +1,6 @@
 /**
  * L.Higlight Leaflet plugin (https://github.com/mmaciejkowalski/L.Highlight)
- * version: 1.0.0
+ * version: 1.0.1
  */
 
 L.Layer.Highlight = L.Layer.extend({
