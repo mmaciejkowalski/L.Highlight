@@ -63,6 +63,13 @@ new L.Layer.Highlight({email: 'your-email@example.com'}).do({
 }).addTo(map);
 ```
 
+Removing layers is also a possibility, just use
+
+```javascript
+// search for areas of Łódź University of Technology (Politechnika) in Łódź, Poland, color them red and attach click event handler alerting name of clicked area
+<layer>.removeFrom(<map>);
+```
+
 It is nice for using email while calling Nominatim, so be sure to include your email in L.Highlight initialisation.
 
 ```javascript

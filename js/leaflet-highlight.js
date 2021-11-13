@@ -8,6 +8,7 @@ L.Layer.Highlight = L.Layer.extend({
   _initOpt: {},
   _otherOpt: undefined,
   _searchOpt: undefined,
+  _layers: [],
 
   onAdd: function (_map) {
     let layer = L.geoJSON(this._data, this._otherOpt);
@@ -18,7 +19,7 @@ L.Layer.Highlight = L.Layer.extend({
       })
     }
 
-    layer.addTo(_map);
+    this._layers.push(layer.addTo(_map));
   },
 
   initialize: function (_opt) {
@@ -33,6 +34,10 @@ L.Layer.Highlight = L.Layer.extend({
     this._data = this._getHighlightData({ street: _searchOpt.street, city: _searchOpt.city, q: _searchOpt.q });
 
     return this;
+  },
+
+  onRemove: function (x) {
+    this._layers.forEach(l => l.removeFrom(this._map));
   },
 
   _getHighlightData: function (_opt) {
@@ -104,7 +109,8 @@ L.Layer.Highlight = L.Layer.extend({
   _filter: function (_data) {
     if (this._searchOpt.city) {
       _data.features = _data.features.filter(e => (e.properties.address.city == this._searchOpt.city)
-        || (e.properties.address.town == this._searchOpt.city));
+        || (e.properties.address.town == this._searchOpt.city)
+        || (e.properties.address.county == this._searchOpt.city));
     }
 
     if (this._searchOpt.street) {
