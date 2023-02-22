@@ -58,7 +58,7 @@ pre {
   padding: 0;
   color: white;
 }
-img[role="presentation"] {
+img.leaflet-tile {
   filter: grayscale(1);
 }
 .hljs {
