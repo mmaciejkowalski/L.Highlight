@@ -3,7 +3,7 @@ Leaflet plugin for creating highlight area for specified street/place using [Nom
 This plugin adds onto Leaflet.Layer which makes highlighting places like streets, cities etc. a lot easier. It also handles the Nominatim paging of results.
 
 # Requirements 
-Leaflet is required before adding L.Highlight. L.Highlight was tested on Leaflet v1.7.1
+Leaflet is required before adding L.Highlight. L.Highlight was tested on Leaflet v1.9.3
 
 # Basic Usage: 
 Clone the L.Highlight repository by doing:
@@ -15,8 +15,8 @@ git clone git@github.com:mmaciejkowalski/L.Highlight.git
 In HTML, import the required Leaflet Javascript and CSS files. 
 
 ```html
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
-<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
 ```
 
 In HTML, import the L.Highlight
@@ -84,7 +84,8 @@ for styling, filtering, areas and more read API Documentation below or visit [de
 L.Layer.Highlight accepts an initialisation object
 ```
 {
-    email: string // as stated above, it is nice for using email while calling Nominatim
+    email: string, // as stated above, it is nice for using email while calling Nominatim
+    nominatimAPI: string // or you can provide your own Nominatim API - if not, default 'https://nominatim.openstreetmap.org' will be used
 }
 ```
 
@@ -116,7 +117,7 @@ where `q` is a basic search query, `city` and `street` used at the same time are
     }
 }
 ```
-Where `style` is the same as in [L.geoJSON](https://leafletjs.com/reference-1.7.1.html#geojson) and `eventHandlers` is an object with event names as keys and event handlers as values. These event handlers are then translated to `.on(<String> type, <Function> fn)` method, so:
+Where `style` is the same as in [L.geoJSON](https://leafletjs.com/reference-1.9.3.html#geojson) and `eventHandlers` is an object with event names as keys and event handlers as values. These event handlers are then translated to `.on(<String> type, <Function> fn)` method, so:
 ```
 {
     eventHandlers: {
