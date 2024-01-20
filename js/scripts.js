@@ -13,7 +13,7 @@ function start() {
     { maxZoom: 18, attribution: attrStr }, { className: "grayscale" }
   ).addTo(map1);
 
-  new L.Layer.Highlight().do({ q: "Piotrkowska, Łódź" }).addTo(map1);
+  new L.Layer.Highlight({email: 'zephyel@gmail.com'}).do({ q: "Piotrkowska, Łódź" }).addTo(map1);
 
   /**
    * second map
@@ -29,9 +29,12 @@ function start() {
     { className: "grayscale" }
   ).addTo(map2);
 
-  new L.Layer.Highlight()
-    .do({ street: "Piotrkowska", city: "Łódź" })
-    .addTo(map2);
+
+  setTimeout(function() {
+    new L.Layer.Highlight()
+      .do({ street: "Piotrkowska", city: "Łódź" })
+      .addTo(map2);
+  }, 1000);
 
   /**
    * third map
@@ -47,7 +50,9 @@ function start() {
     { className: "grayscale" }
   ).addTo(map3);
 
-  new L.Layer.Highlight().do({ q: 'Manufaktura, Łódź', filter: "Polygon", }).addTo(map3);
+  setTimeout(function() {
+    new L.Layer.Highlight().do({ q: 'Manufaktura, Łódź', filter: "Polygon", }).addTo(map3);
+  }, 2000);
 
   /**
    * fourth map
@@ -63,7 +68,9 @@ function start() {
     { className: "grayscale" }
   ).addTo(map4);
 
-  new L.Layer.Highlight().do({ q: 'Park Poniatowskiego, Łódź', filter: "Polygon" }, { style: function (x) { return { color: '#0f0' } } }).addTo(map4);
+  setTimeout(function() {
+    new L.Layer.Highlight().do({ q: 'Park Poniatowskiego, Łódź', filter: "Polygon" }, { style: function (x) { return { color: '#0f0' } } }).addTo(map4);
+  }, 3000);
 
   /**
    * fifth map
@@ -79,8 +86,10 @@ function start() {
     { className: "grayscale" }
   ).addTo(map5);
 
-  new L.Layer.Highlight().do({ q: "Politechnika, Łódź", filter: "Polygon" }, { style: function () { return { color: "#f00" }; }, eventHandlers: { click: function (area) { alert(area.sourceTarget.feature.properties.display_name); } } }).addTo(map5);
-
+  setTimeout(function() {
+    new L.Layer.Highlight().do({ q: "Politechnika, Łódź", filter: "Polygon" }, { style: function () { return { color: "#f00" }; }, eventHandlers: { click: function (area) { alert(area.sourceTarget.feature.properties.display_name); } } }).addTo(map5);
+  }, 4000);
+  
   /**
    * sixth map
    */
