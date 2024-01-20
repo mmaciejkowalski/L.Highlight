@@ -1,10 +1,6 @@
 /**
  * L.Higlight Leaflet plugin (https://github.com/mmaciejkowalski/L.Highlight)
-<<<<<<< Updated upstream
- * version: 1.0.1
-=======
  * version: 1.1.0
->>>>>>> Stashed changes
  */
 
 L.Layer.Highlight = L.Layer.extend({
@@ -163,8 +159,6 @@ L.Layer.Highlight = L.Layer.extend({
     let result = [];
     let params = {
       q: _opt.q ? _opt.q : '',
-      street: _opt.q ? '' : _opt.street,
-      city: _opt.city,
       exclude_place_ids: _opt.exclude ? _opt.exclude.join(',') : '',
       format: 'geojson',
       polygon_geojson: 1,
@@ -174,6 +168,11 @@ L.Layer.Highlight = L.Layer.extend({
       polygon_geojson: 1,
       email: this._initOpt.email ? this._initOpt.email : ''
     };
+
+    if (!_opt.q) {
+      params.street = _opt.street,
+      params.city = _opt.city
+    }
 
     for (let p in params) {
       result.push(encodeURIComponent(p) + '=' + encodeURIComponent(params[p]));
