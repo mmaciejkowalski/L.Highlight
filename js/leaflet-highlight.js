@@ -158,7 +158,6 @@ L.Layer.Highlight = L.Layer.extend({
   _encodeQueryData: function (_opt) {
     let result = [];
     let params = {
-      q: _opt.q ? _opt.q : '',
       exclude_place_ids: _opt.exclude ? _opt.exclude.join(',') : '',
       format: 'geojson',
       polygon_geojson: 1,
@@ -172,6 +171,8 @@ L.Layer.Highlight = L.Layer.extend({
     if (!_opt.q) {
       params.street = _opt.street,
       params.city = _opt.city
+    } else {
+      params.q = _opt.q
     }
 
     for (let p in params) {
