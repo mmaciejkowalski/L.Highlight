@@ -20,6 +20,7 @@ In HTML, import the required Leaflet Javascript and CSS files.
 ```
 
 In HTML, import the L.Highlight
+(it could be also downloaded from npm: [leaflet-highlight](https://www.npmjs.com/package/leaflet-highlight))
 
 ```html
 <script src="leaflet-highlight.min.js"></script>
