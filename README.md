@@ -3,7 +3,7 @@ Leaflet plugin for creating highlight area for specified street/place using [Nom
 This plugin adds onto Leaflet.Layer which makes highlighting places like streets, cities etc. a lot easier. It also handles the Nominatim paging of results.
 
 # Requirements 
-Leaflet is required before adding L.Highlight. L.Highlight was tested on Leaflet v1.9.3
+Leaflet is required before adding L.Highlight. L.Highlight was tested on Leaflet v2.0.0-alpha.1
 
 # Basic Usage: 
 Clone the L.Highlight repository by doing:
@@ -15,8 +15,8 @@ git clone git@github.com:mmaciejkowalski/L.Highlight.git
 In HTML, import the required Leaflet Javascript and CSS files. 
 
 ```html
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
-<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@2.0.0-alpha.1/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@2.0.0-alpha.1/dist/leaflet.js"></script>
 ```
 
 In HTML, import the L.Highlight
@@ -85,7 +85,8 @@ L.Layer.Highlight accepts an initialisation object
 ```
 {
     email: string, // as stated above, it is nice for using email while calling Nominatim
-    nominatimAPI: string // or you can provide your own Nominatim API - if not, default 'https://nominatim.openstreetmap.org' will be used
+    nominatimAPI: string, // or you can provide your own Nominatim API - if not, default 'https://nominatim.openstreetmap.org' will be used
+    maxRetries: number // max number of retries for Nominatim API calls
 }
 ```
 

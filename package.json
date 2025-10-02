@@ -1,0 +1,28 @@
+{
+  "name": "leaflet-highlight",
+  "version": "1.2.0",
+  "description": "Leaflet plugin for creating highlight area for specified street/place using Nominatim. This plugin adds onto Leaflet.Layer which makes highlighting places like streets, cities etc. a lot easier. It also handles the Nominatim paging of results.",
+  "main": "dist/leaflet-highlight.min.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mmaciejkowalski/L.Highlight.git"
+  },
+  "keywords": [
+    "leaflet"
+  ],
+  "author": "Maciej Kowalski <dev@maciejkowalski.pl>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mmaciejkowalski/L.Highlight/issues"
+  },
+  "homepage": "https://github.com/mmaciejkowalski/L.Highlight#readme",
+  "devDependencies": {
+    "terser": "^5.44.0"
+  }
+}

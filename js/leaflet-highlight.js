@@ -1,6 +1,6 @@
 /**
  * L.Higlight Leaflet plugin (https://github.com/mmaciejkowalski/L.Highlight)
- * version: 1.1.0
+ * version: 1.2.0
  */
 
 L.Layer.Highlight = L.Layer.extend({
@@ -10,9 +10,9 @@ L.Layer.Highlight = L.Layer.extend({
   _searchOpt: undefined,
   _layers: [],
 
-  onAdd: function (_map) {
+  onAdd: function (_map, _tries = this._initOpt.maxRetries) {
     if (this._data) {
-      let layer = L.geoJSON(this._data, this._otherOpt);
+      let layer = new L.GeoJSON(this._data, this._otherOpt);
 
       if (this._otherOpt.eventHandlers !== undefined) {
         Object.keys(this._otherOpt.eventHandlers).forEach((e) => {
@@ -22,9 +22,11 @@ L.Layer.Highlight = L.Layer.extend({
 
       this._layers.push(layer.addTo(_map));
     } else {
-      setTimeout(function () {
-        this.onAdd(_map);
-      }.bind(this), 1000);
+      if (_tries > 0) {
+        setTimeout(function () {
+          this.onAdd(_map, _tries -1);
+        }.bind(this), 1000); 
+      }
     }
   },
 
@@ -34,6 +36,11 @@ L.Layer.Highlight = L.Layer.extend({
     }
     if (_opt && _opt.nominatimAPI) {
       this._initOpt.nominatimAPI = _opt.nominatimAPI;
+    }
+    if (_opt && _opt.maxRetries) {
+      this._initOpt.maxRetries = _opt.maxRetries;
+    } else {
+      this._initOpt.maxRetries = 3;
     }
   },
 
@@ -63,7 +70,7 @@ L.Layer.Highlight = L.Layer.extend({
     let queue = [];
 
 
-    if (this._searchOpt.limit > 1) {
+    if (this._searchOpt.limit > 1 && _result) {
       while (this._filter(_result).features.length % this._searchOpt.limit === 0) {
         _opt.exclude = _result.features.map(e => e.properties.place_id);
         queue.push(this._getBatch(_opt, this));
@@ -92,14 +99,13 @@ L.Layer.Highlight = L.Layer.extend({
 
       xmlhttp.onload = function () {
         if (xmlhttp.status == 200) {
-          resolve(JSON.parse(xmlhttp.responseText));
+          resolve(xmlhttp.responseText.length > 0 ? JSON.parse(xmlhttp.responseText) : null);
         } else {
           reject({
             status: xmlhttp.status,
             statusText: xmlhttp.statusText
           });
         }
-
       }.bind(this);
 
       xmlhttp.open("GET", (that._initOpt.nominatimAPI ? that._initOpt.nominatimAPI : "https://nominatim.openstreetmap.org") + "/search?" + that._encodeQueryData(_opt), true);
@@ -132,7 +138,7 @@ L.Layer.Highlight = L.Layer.extend({
   },
 
   _cleanup: function (_data) {
-    if (this._searchOpt.filter) {
+    if (this._searchOpt.filter && _data) {
       _data.features = _data.features.filter(e => e.geometry.type == this._searchOpt.filter);
     }
 
@@ -142,13 +148,13 @@ L.Layer.Highlight = L.Layer.extend({
   },
 
   _filter: function (_data) {
-    if (this._searchOpt.city) {
+    if (this._searchOpt.city && _data) {
       _data.features = _data.features.filter(e => (e.properties.address.city == this._searchOpt.city)
         || (e.properties.address.town == this._searchOpt.city)
         || (e.properties.address.county == this._searchOpt.city));
     }
 
-    if (this._searchOpt.street) {
+    if (this._searchOpt.street && _data) {
       _data.features = _data.features.filter(e => e.properties.address.road == this._searchOpt.street);
     }
 
